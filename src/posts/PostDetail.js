@@ -5,9 +5,15 @@ class PostDetail extends Component {
     super(props)
     this.titleWasClicked = this.titleWasClicked.bind(this)
     this.toggleContent = this.toggleContent.bind(this)
+    this.handleRemoveContentButton = this.handleRemoveContentButton.bind(this)
     this.state = {
       showContent : true,
       postItem : null
+    }
+  }
+  handleRemoveContentButton (event) {
+    if(this.props.handlePostRemove) {
+      this.props.handlePostRemove(this.state.postItem)
     }
   }
   titleWasClicked (event) {
@@ -44,6 +50,7 @@ class PostDetail extends Component {
              <h1 onClick={this.titleWasClicked}>{postItem.title}</h1>
              {this.state.showContent === true ? <p>{postItem.content}</p> : ''}
              <button onClick={this.toggleContent}>Toggle Content Display</button>
+             <button onClick={this.handleRemoveContentButton}>Remove Content</button>
            </div>
            : ''}
        </div>
